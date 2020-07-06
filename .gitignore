@@ -1,0 +1,8 @@
+Gemfile.lock
+
+/node_modules/
+yarn.lock
+
+/coverage/
+
+*.gem

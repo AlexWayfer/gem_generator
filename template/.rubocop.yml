@@ -1,0 +1,54 @@
+require:
+  - rubocop-performance
+  - rubocop-rspec
+
+Layout/IndentationStyle:
+  EnforcedStyle: tabs
+  IndentationWidth: 2
+Layout/IndentationWidth:
+  Width: 1
+Layout/LineLength:
+  Max: 100
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+Lint/MixedRegexpCaptureTypes:
+  Enabled: true
+Lint/RaiseException:
+  Enabled: true
+Lint/StructNewOverride:
+  Enabled: true
+
+Style/HashEachMethods:
+  Enabled: true
+Style/HashTransformKeys:
+  Enabled: true
+Style/HashTransformValues:
+  Enabled: true
+Style/ExponentialNotation:
+  Enabled: true
+Style/RedundantFetchBlock:
+  Enabled: true
+Style/RedundantRegexpCharacterClass:
+  Enabled: true
+Style/RedundantRegexpEscape:
+  Enabled: true
+Style/SlicingWithRange:
+  Enabled: true
+
+Metrics/BlockLength:
+  Exclude:
+    - '*.gemspec'
+    - spec/**/*.rb
+
+AllCops:
+  TargetRubyVersion: 2.5
+
+RSpec/NestedGroups:
+  Max: 4
