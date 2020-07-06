@@ -14,16 +14,16 @@ Gem::Specification.new do |spec|
 
 	spec.required_ruby_version = '>= 2.5'
 
-	# source_code_uri = 'https://github.com/AlexWayfer/foo_bar'
-	#
-	# spec.homepage = source_code_uri
-	#
-	# spec.metadata['source_code_uri'] = source_code_uri
-	#
-	# spec.metadata['homepage_uri'] = spec.homepage
-	#
+	source_code_uri = 'https://github.com/AlexWayfer/gem_generator'
+
+	spec.homepage = source_code_uri
+
+	spec.metadata['source_code_uri'] = source_code_uri
+
+	spec.metadata['homepage_uri'] = spec.homepage
+
 	# spec.metadata['changelog_uri'] =
-	# 	'https://github.com/AlexWayfer/foo_bar/blob/master/CHANGELOG.md'
+	# 	'https://github.com/AlexWayfer/gem_generator/blob/master/CHANGELOG.md'
 
 	files = %w[
 		lib/**/*.rb
