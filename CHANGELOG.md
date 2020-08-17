@@ -2,4 +2,4 @@
 
 ## master (unreleased)
 
-*   Initial commit
+*   Initial release.

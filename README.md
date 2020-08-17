@@ -1,11 +1,11 @@
 # Gem Generator
 
-![Cirrus CI - Base Branch Build Status](https://img.shields.io/cirrus/github/AlexWayfer/gem_generator?style=flat-square)
+[![Cirrus CI - Base Branch Build Status](https://img.shields.io/cirrus/github/AlexWayfer/gem_generator?style=flat-square)](https://cirrus-ci.com/github/AlexWayfer/gem_generator)
 [![Codecov branch](https://img.shields.io/codecov/c/github/AlexWayfer/gem_generator/master.svg?style=flat-square)](https://codecov.io/gh/AlexWayfer/gem_generator)
 [![Code Climate](https://img.shields.io/codeclimate/maintainability/AlexWayfer/gem_generator.svg?style=flat-square)](https://codeclimate.com/github/AlexWayfer/gem_generator)
-![Depfu](https://img.shields.io/depfu/AlexWayfer/gem_generator?style=flat-square)
+[![Depfu](https://img.shields.io/depfu/AlexWayfer/gem_generator?style=flat-square)](https://depfu.com/repos/github/AlexWayfer/gem_generator)
 [![Inline docs](https://inch-ci.org/github/AlexWayfer/gem_generator.svg?branch=master)](https://inch-ci.org/github/AlexWayfer/gem_generator)
-[![license](https://img.shields.io/github/license/AlexWayfer/gem_generator.svg?style=flat-square)](https://github.com/AlexWayfer/gem_generator/blob/master/LICENSE)
+[![license](https://img.shields.io/github/license/AlexWayfer/gem_generator.svg?style=flat-square)](https://github.com/AlexWayfer/gem_generator/blob/master/LICENSE.txt)
 [![Gem](https://img.shields.io/gem/v/gem_generator.svg?style=flat-square)](https://rubygems.org/gems/gem_generator)
 
 Gem for new gems generation.
@@ -45,13 +45,13 @@ gem_generator name_of_a_new_gem
 ## Development
 
 After checking out the repo, run `bundle install` to install dependencies.
-Then, run `bundle exec rake spec` to run the tests.
 
-To install this gem onto your local machine, run `bundle exec rake install`.
-To release a new version, update the version number in `version.rb`,
-and then run `bundle exec rake release`, which will create a git tag
-for the version, push git commits and tags, and push the `.gem` file
-to [rubygems.org](https://rubygems.org).
+Then, run `toys rspec` to run the tests.
+
+To install this gem onto your local machine, run `toys gem install`.
+
+To release a new version, run `toys gem release %version%`.
+See how it works [here](https://github.com/AlexWayfer/gem_toys#release).
 
 ## Contributing
 

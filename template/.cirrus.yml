@@ -6,7 +6,9 @@ bundle_cache: &bundle_cache
       - ruby -v
       - cat Gemfile
       - cat *.gemspec
-  install_script: bundle update
+  install_script:
+    - gem install bundler
+    - bundle update
 
 remark_task:
   container:
@@ -18,28 +20,58 @@ remark_task:
       - node -v
       - cat package.json
   install_script: npm install
+
   lint_script: npm run remark
+
   only_if: ($CIRRUS_BRANCH == 'master') ||
     changesInclude(
-      '.cirrus.yml', 'package.json', '.remarkrc.yaml', '**/*.md'
+      '.cirrus.yml', '.gitignore', 'package.json', '.remarkrc.yaml', '**.md'
     )
 
 rubocop_task:
   container:
     image: ruby:latest
   <<: *bundle_cache
-  rubocop_script: bundle exec rubocop
 
-test_task:
+  lint_script: toys rubocop --format=json --out=rubocop.json
+
+  always:
+    rubocop_artifacts:
+      path: rubocop.json
+      type: text/json
+      format: rubocop
+
+  only_if: ($CIRRUS_BRANCH == 'master') ||
+    changesInclude(
+      '.cirrus.yml', '.gitignore', 'Gemfile', '.toys.rb', '.rubocop.yml', '*.gemspec',
+      '**.rb', '**.ru'
+    )
+
+rspec_task:
   depends_on:
     - remark
     - rubocop
+
   container:
     matrix:
       image: ruby:2.5
       image: ruby:2.6
       image: ruby:2.7
   <<: *bundle_cache
+
   # environment:
   #   CODECOV_TOKEN: ENCRYPTED[...]
-  test_script: bundle exec rake
+
+  test_script: toys rspec --format=json --out=rspec.json
+
+  always:
+    rspec_artifacts:
+      path: rspec.json
+      type: text/json
+      format: rspec
+
+  only_if: ($CIRRUS_BRANCH == 'master') ||
+    changesInclude(
+      '.cirrus.yml', '.gitignore', 'Gemfile', '.toys.rb', '.rspec', '*.gemspec', 'lib/**',
+      'spec/**'
+    )
