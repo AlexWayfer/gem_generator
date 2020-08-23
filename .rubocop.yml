@@ -40,4 +40,7 @@ AllCops:
   NewCops: enable
 
 RSpec/NestedGroups:
-  Max: 4
+  Enabled: false
+## https://github.com/rubocop-hq/rubocop-rspec/pull/863/files#r471603667
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
