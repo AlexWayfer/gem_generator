@@ -6,5 +6,3 @@ require 'gem_toys'
 expand GemToys::Template
 
 alias_tool :g, :gem
-
-expand :rubocop

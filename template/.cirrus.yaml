@@ -33,7 +33,7 @@ rubocop_task:
     image: ruby:latest
   <<: *bundle_cache
 
-  lint_script: toys rubocop --format=json --out=rubocop.json
+  lint_script: bundle exec rubocop --format=json --out=rubocop.json
 
   always:
     rubocop_artifacts:
@@ -62,7 +62,7 @@ rspec_task:
   # environment:
   #   CODECOV_TOKEN: ENCRYPTED[...]
 
-  test_script: toys rspec --format=json --out=rspec.json
+  test_script: bundle exec rspec --format=json --out=rspec.json
 
   always:
     rspec_artifacts:

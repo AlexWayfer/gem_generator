@@ -30,7 +30,7 @@ rubocop_task:
   container:
     image: ruby:latest
   <<: *bundle_cache
-  lint_script: toys rubocop
+  lint_script: bundle exec rubocop
   only_if: ($CIRRUS_BRANCH == 'master') ||
     changesInclude(
       '.cirrus.yaml', 'Gemfile', 'Rakefile', '.rubocop.yml', '*.gemspec',
