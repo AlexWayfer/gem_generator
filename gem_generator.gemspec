@@ -36,6 +36,7 @@ Gem::Specification.new do |spec|
 	spec.bindir = 'exe'
 	spec.executables.concat %w[gem_generator]
 
+	spec.add_runtime_dependency 'alt_memery', '~> 2.0'
 	spec.add_runtime_dependency 'clamp', '~> 1.3'
 
 	spec.add_development_dependency 'pry-byebug', '~> 3.9'
