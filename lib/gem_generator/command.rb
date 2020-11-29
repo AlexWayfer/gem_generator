@@ -84,7 +84,7 @@ module GemGenerator
 
 			abort <<~TEXT
 				You have to specify project's author.
-				You can use `git config --get user.name` and `user.email`, or create a configuration file.
+				You can use `git config --set user.name` and `user.email`, or create a configuration file.
 				Check the README.
 			TEXT
 		end
