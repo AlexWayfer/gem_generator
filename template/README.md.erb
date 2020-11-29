@@ -1,12 +1,12 @@
-# <%= @project_title %>
+# <%= title %>
 
-[![Cirrus CI - Base Branch Build Status](https://img.shields.io/cirrus/github/<%= @project_github_path %>?style=flat-square)](https://cirrus-ci.com/github/<%= @project_github_path %>)
-[![Codecov branch](https://img.shields.io/codecov/c/github/<%= @project_github_path %>/master.svg?style=flat-square)](https://codecov.io/gh/<%= @project_github_path %>)
-[![Code Climate](https://img.shields.io/codeclimate/maintainability/<%= @project_github_path %>.svg?style=flat-square)](https://codeclimate.com/github/<%= @project_github_path %>)
-[![Depfu](https://img.shields.io/depfu/<%= @project_github_path %>?style=flat-square)](https://depfu.com/repos/github/<%= @project_github_path %>)
-[![Inline docs](https://inch-ci.org/github/<%= @project_github_path %>.svg?branch=master)](https://inch-ci.org/github/<%= @project_github_path %>)
-[![License](https://img.shields.io/github/license/<%= @project_github_path %>.svg?style=flat-square)](LICENSE.txt)
-[![Gem](https://img.shields.io/gem/v/<%= @project_name %>.svg?style=flat-square)](https://rubygems.org/gems/<%= @project_name %>)
+[![Cirrus CI - Base Branch Build Status](https://img.shields.io/cirrus/github/<%= github_path %>?style=flat-square)](https://cirrus-ci.com/github/<%= github_path %>)
+[![Codecov branch](https://img.shields.io/codecov/c/github/<%= github_path %>/master.svg?style=flat-square)](https://codecov.io/gh/<%= github_path %>)
+[![Code Climate](https://img.shields.io/codeclimate/maintainability/<%= github_path %>.svg?style=flat-square)](https://codeclimate.com/github/<%= github_path %>)
+[![Depfu](https://img.shields.io/depfu/<%= github_path %>?style=flat-square)](https://depfu.com/repos/github/<%= github_path %>)
+[![Inline docs](https://inch-ci.org/github/<%= github_path %>.svg?branch=master)](https://inch-ci.org/github/<%= github_path %>)
+[![License](https://img.shields.io/github/license/<%= github_path %>.svg?style=flat-square)](LICENSE.txt)
+[![Gem](https://img.shields.io/gem/v/<%= name %>.svg?style=flat-square)](https://rubygems.org/gems/<%= name %>)
 
 TODO
 
@@ -15,7 +15,7 @@ TODO
 Add this line to your application's Gemfile:
 
 ```ruby
-gem '<%= @project_name %>'
+gem '<%= name %>'
 ```
 
 And then execute:
@@ -27,13 +27,13 @@ bundle install
 Or install it yourself as:
 
 ```shell
-gem install <%= @project_name %>
+gem install <%= name %>
 ```
 
 ## Usage
 
 ```ruby
-require '<%= @project_path %>'
+require '<%= path %>'
 
 # TODO
 ```
@@ -51,7 +51,7 @@ See how it works [here](https://github.com/AlexWayfer/gem_toys#release).
 
 ## Contributing
 
-Bug reports and pull requests are welcome on [GitHub](<%= @project_github_url %>).
+Bug reports and pull requests are welcome on [GitHub](<%= github_url %>).
 
 ## License
 

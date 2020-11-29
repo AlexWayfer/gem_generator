@@ -9,7 +9,7 @@ alias_tool :g, :gem
 
 tool :console do
 	def run
-		require_relative 'lib/<%= @project_path %>'
+		require_relative 'lib/<%= path %>'
 
 		require 'pry'
 		Pry.start

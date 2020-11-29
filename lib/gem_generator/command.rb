@@ -15,10 +15,15 @@ module GemGenerator
 
 		option ['-n', '--namespace'], 'NAME', 'use NAME as repository namespace'
 
+		attr_reader(
+			:path, :title, :modules, :version_constant, :github_path, :github_url,
+			:author_name, :author_email
+		)
+
 		def execute
 			@directory = File.expand_path name
 
-			assign_project_variables
+			assign_variables
 
 			copy_files
 
@@ -41,25 +46,25 @@ module GemGenerator
 		using GorillaPatch::Blank
 		using GorillaPatch::Inflections
 
-		def assign_project_variables
-			@project_name = name
-			@project_path = @project_name.tr('-', '/')
-			@project_module = @project_path.camelize
-			@project_modules = @project_module.split('::')
-			@project_version_constant = "#{@project_module}::VERSION"
-			@project_title = @project_name.split(/[-_]/).map(&:camelize).join(' ')
+		def assign_variables
+			@path = name.tr('-', '/')
+			@title = name.split(/[-_]/).map(&:camelize).join(' ')
+
+			module_name = path.camelize
+			@modules = module_name.split('::')
+			@version_constant = "#{module_name}::VERSION"
 
 			@config = YAML.load_file find_config_file
 
-			assign_project_repository_variables
+			assign_repository_variables
 
-			assign_project_author_variables
+			assign_author_variables
 		end
 
-		def assign_project_repository_variables
-			project_github_namespace = namespace || @config[:namespace]
+		def assign_repository_variables
+			github_namespace = namespace || @config[:namespace]
 
-			if project_github_namespace.blank?
+			if github_namespace.blank?
 				abort <<~TEXT
 					You have to specify project's namespace on GitHub.
 					You can use `--namespace` option, or create a configuration file.
@@ -67,15 +72,15 @@ module GemGenerator
 				TEXT
 			end
 
-			@project_github_path = "#{project_github_namespace}/#{@project_name}"
-			@project_github_url = "https://github.com/#{@project_github_path}"
+			@github_path = "#{github_namespace}/#{name}"
+			@github_url = "https://github.com/#{github_path}"
 		end
 
-		def assign_project_author_variables
-			@project_author_name = @config.fetch :author_name, `git config --get user.name`.chomp
-			@project_author_email = @config.fetch :author_email, `git config --get user.email`.chomp
+		def assign_author_variables
+			@author_name = @config.fetch :author_name, `git config --get user.name`.chomp
+			@author_email = @config.fetch :author_email, `git config --get user.email`.chomp
 
-			return unless @project_author_name.blank? || @project_author_email.blank?
+			return unless author_name.blank? || author_email.blank?
 
 			abort <<~TEXT
 				You have to specify project's author.
@@ -107,7 +112,7 @@ module GemGenerator
 		def rename_files
 			puts 'Renaming files...'
 
-			{ 'gem_name' => @project_name, 'gem_path' => @project_path }
+			{ 'gem_name' => name, 'gem_path' => path }
 				.each do |template_name, real_name|
 					Dir["#{@directory}/**/*#{template_name}*"].each do |file_name|
 						new_file_name =

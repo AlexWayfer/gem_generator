@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-require_relative 'lib/<%= @project_path %>/version'
+require_relative 'lib/<%= path %>/version'
 
 Gem::Specification.new do |spec|
-	spec.name        = '<%= @project_name %>'
-	spec.version     = <%= @project_version_constant %>
-	spec.authors     = ['<%= @project_author_name %>']
-	spec.email       = ['<%= @project_author_email %>']
+	spec.name        = '<%= name %>'
+	spec.version     = <%= version_constant %>
+	spec.authors     = ['<%= author_name %>']
+	spec.email       = ['<%= author_email %>']
 
 	spec.summary     = 'TODO'
 	spec.description = <<~DESC
@@ -15,11 +15,11 @@ Gem::Specification.new do |spec|
 	spec.license = 'MIT'
 
 	spec.metadata = {
-		'source_code_uri' => '<%= @project_github_url %>',
-		'documentation_uri' => "http://www.rubydoc.info/gems/<%= @project_name %>/#{<%= @project_version_constant %>}",
-		'bug_tracker_uri' => '<%= @project_github_url %>/issues',
-		'changelog_uri' => '<%= @project_github_url %>/blob/master/CHANGELOG.md'
-		'wiki_uri' => '<%= @project_github_url %>/wiki'
+		'source_code_uri' => '<%= github_url %>',
+		'documentation_uri' => "http://www.rubydoc.info/gems/<%= name %>/#{<%= version_constant %>}",
+		'bug_tracker_uri' => '<%= github_url %>/issues',
+		'changelog_uri' => '<%= github_url %>/blob/master/CHANGELOG.md'
+		'wiki_uri' => '<%= github_url %>/wiki'
 	}
 
 	spec.metadata['homepage_uri'] = spec.metadata['source_code_uri']
