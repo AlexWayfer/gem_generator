@@ -3,6 +3,7 @@
 require 'clamp'
 require 'erb'
 require 'fileutils'
+require 'gorilla_patch/blank'
 require 'gorilla_patch/inflections'
 require 'pathname'
 require 'yaml'
@@ -11,6 +12,8 @@ module GemGenerator
 	## Main CLI command for Gem Generator
 	class Command < Clamp::Command
 		parameter 'NAME', 'name of a new gem'
+
+		option ['-n', '--namespace'], 'NAME', 'use NAME as repository namespace'
 
 		def execute
 			@directory = File.expand_path name
@@ -33,6 +36,7 @@ module GemGenerator
 
 		private
 
+		using GorillaPatch::Blank
 		using GorillaPatch::Inflections
 
 		def assign_project_variables
@@ -43,32 +47,39 @@ module GemGenerator
 			@project_version_constant = "#{@project_module}::VERSION"
 			@project_title = @project_name.split(/[-_]/).map(&:camelize).join(' ')
 
-			assign_project_variables_from_config
+			@config = YAML.load_file find_config_file
+
+			assign_project_repository_variables
+
+			assign_project_author_variables
 		end
 
-		def assign_project_variables_from_config
-			load_config
+		def assign_project_repository_variables
+			project_github_namespace = namespace || @config[:namespace]
 
-			project_github_namespace = @config.fetch :github_namespace
-			@project_github_path = "#{project_github_namespace}/#{@project_name}"
-			@project_github_url = "https://github.com/#{@project_github_path}"
-			@project_author_name = @config.fetch :author_name, `git config --get user.name`.chomp
-			@project_author_email = @config.fetch :author_email, `git config --get user.email`.chomp
-		end
-
-		CONFIG_FILE_NAME = '.gem_generator.y{a,}ml'
-
-		def load_config
-			config_file = find_config_file
-
-			unless config_file
+			if project_github_namespace.blank?
 				abort <<~TEXT
-					You have to create `#{CONFIG_FILE_NAME}` file, for example in home directory.
+					You have to specify project's namespace on GitHub.
+					You can use `--namespace` option, or create a configuration file.
 					Check the README.
 				TEXT
 			end
 
-			@config = YAML.load_file config_file
+			@project_github_path = "#{project_github_namespace}/#{@project_name}"
+			@project_github_url = "https://github.com/#{@project_github_path}"
+		end
+
+		def assign_project_author_variables
+			@project_author_name = @config.fetch :author_name, `git config --get user.name`.chomp
+			@project_author_email = @config.fetch :author_email, `git config --get user.email`.chomp
+
+			return unless @project_author_name.blank? || @project_author_email.blank?
+
+			abort <<~TEXT
+				You have to specify project's author.
+				You can use `git config --get user.name` and `user.email`, or create a configuration file.
+				Check the README.
+			TEXT
 		end
 
 		def find_config_file
@@ -76,7 +87,7 @@ module GemGenerator
 
 			until (
 				config_file = Dir.glob(
-					File.join(config_lookup_directory, CONFIG_FILE_NAME), File::FNM_DOTMATCH
+					File.join(config_lookup_directory, '.gem_generator.y{a,}ml'), File::FNM_DOTMATCH
 				).first
 			) || config_lookup_directory == '/'
 				config_lookup_directory = File.dirname config_lookup_directory

@@ -22,12 +22,17 @@ gem install gem_generator
 
 ## Usage
 
-At first, you have to create a config file, `.gem_generator.yaml` (or `.yml`) like this:
+```sh
+gem_generator --namespace=github_nickname name_of_a_new_gem
+```
+
+You can create a config file, `.gem_generator.yaml` (or `.yml`) like this:
 
 ```yaml
-:github_namespace: AlexWayfer
+## This can be overwriten via `--namespace` CLI option, config just as default
+:namespace: AlexWayfer
 
-## These options are not required and have defaults from `git`
+## These options have defaults from `git config --get user.*`
 # :author_name: Alexander Popov
 # :author_email: alex.wayfer@gmail.com
 ```
@@ -35,12 +40,6 @@ At first, you have to create a config file, `.gem_generator.yaml` (or `.yml`) li
 Gem Generator will look for it in each directory from current to the root,
 so the common place for it in the home directory, but you can redefine it,
 for example, in some directory for work projects.
-
-Then just execute:
-
-```sh
-gem_generator name_of_a_new_gem
-```
 
 ## Development
 
