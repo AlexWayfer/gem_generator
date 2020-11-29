@@ -26,6 +26,8 @@ module GemGenerator
 
 			render_files
 
+			initialize_git
+
 			puts 'Done.'
 
 			puts <<~HELP
@@ -126,6 +128,15 @@ module GemGenerator
 				content = ERB.new(File.read(template_file)).result(binding)
 				File.write real_pathname, content
 				FileUtils.rm template_file
+			end
+		end
+
+		def initialize_git
+			puts 'Initializing git...'
+
+			Dir.chdir name do
+				system 'git init'
+				system 'git add .'
 			end
 		end
 	end
