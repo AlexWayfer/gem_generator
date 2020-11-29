@@ -52,11 +52,11 @@ module GemGenerator
 			"https://github.com/#{github_path}"
 		end
 
-		%w[name email].each do |property|
+		%i[name email].each do |property|
 			method_name = "author_#{property}"
 
 			define_method method_name do
-				result = config.fetch method_name.to_sym, `git config --get user.#{property}`.chomp
+				result = config.dig(:author, property) || `git config --get user.#{property}`.chomp
 
 				return result unless result.blank?
 

@@ -33,8 +33,9 @@ You can create a config file, `.gem_generator.yaml` (or `.yml`) like this:
 :namespace: AlexWayfer
 
 ## These options have defaults from `git config --get user.*`
-# :author_name: Alexander Popov
-# :author_email: alex.wayfer@gmail.com
+# :author:
+#   :name: Alexander Popov
+#   :email: alex.wayfer@gmail.com
 ```
 
 Gem Generator will look for it in each directory from current to the root,
