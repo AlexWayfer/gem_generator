@@ -40,6 +40,7 @@ module GemGenerator
 			@project_path = @project_name.tr('-', '/')
 			@project_module = @project_path.camelize
 			@project_modules = @project_module.split('::')
+			@project_version_constant = "#{@project_module}::VERSION"
 			@project_title = @project_name.split(/[-_]/).map(&:camelize).join(' ')
 
 			assign_project_variables_from_config
@@ -50,6 +51,7 @@ module GemGenerator
 
 			project_github_namespace = @config.fetch :github_namespace
 			@project_github_path = "#{project_github_namespace}/#{@project_name}"
+			@project_github_url = "https://github.com/#{@project_github_path}"
 			@project_author_name = @config.fetch :author_name, `git config --get user.name`.chomp
 			@project_author_email = @config.fetch :author_email, `git config --get user.email`.chomp
 		end

@@ -4,7 +4,7 @@ require_relative 'lib/<%= @project_path %>/version'
 
 Gem::Specification.new do |spec|
 	spec.name        = '<%= @project_name %>'
-	spec.version     = <%= @project_module %>::VERSION
+	spec.version     = <%= @project_version_constant %>
 	spec.authors     = ['<%= @project_author_name %>']
 	spec.email       = ['<%= @project_author_email %>']
 
@@ -14,16 +14,16 @@ Gem::Specification.new do |spec|
 	DESC
 	spec.license = 'MIT'
 
-	source_code_uri = 'https://github.com/<%= @project_github_path %>'
+	spec.metadata = {
+		'source_code_uri' => '<%= @project_github_url %>',
+		'documentation_uri' => "http://www.rubydoc.info/gems/<%= @project_name %>/#{<%= @project_version_constant %>}",
+		'bug_tracker_uri' => '<%= @project_github_url %>/issues',
+		'changelog_uri' => '<%= @project_github_url %>/blob/master/CHANGELOG.md'
+		'wiki_uri' => '<%= @project_github_url %>/wiki'
+	}
 
-	spec.homepage = source_code_uri
-
-	spec.metadata['source_code_uri'] = source_code_uri
-
-	spec.metadata['homepage_uri'] = spec.homepage
-
-	spec.metadata['changelog_uri'] =
-		'https://github.com/<%= @project_github_path %>/blob/master/CHANGELOG.md'
+	spec.metadata['homepage_uri'] = spec.metadata['source_code_uri']
+	spec.homepage = spec.metadata['homepage_uri']
 
 	spec.files = Dir['lib/**/*.rb', 'README.md', 'LICENSE.txt', 'CHANGELOG.md']
 
