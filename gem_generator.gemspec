@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
 	DESC
 	spec.license = 'MIT'
 
-	spec.required_ruby_version = '~> 2.5'
+	spec.required_ruby_version = '>= 2.5'
 
 	source_code_uri = 'https://github.com/AlexWayfer/gem_generator'
 
