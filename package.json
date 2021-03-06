@@ -1,6 +1,6 @@
 {
 	"scripts": {
-		"remark": "remark ."
+		"remark": "remark -f ."
 	},
 	"devDependencies": {
 		"remark-cli": "^9.0.0",
