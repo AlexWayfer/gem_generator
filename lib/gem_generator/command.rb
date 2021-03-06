@@ -15,7 +15,7 @@ module GemGenerator
 		option ['-n', '--namespace'], 'NAME', 'use NAME as repository namespace'
 
 		attr_reader(
-			:path, :title, :modules, :version_constant, :github_path, :github_url,
+			:path, :title, :modules, :version_constant, :github_path, :github_uri,
 			:author_name, :author_email
 		)
 

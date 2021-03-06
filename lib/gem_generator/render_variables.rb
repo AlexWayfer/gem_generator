@@ -48,7 +48,11 @@ module GemGenerator
 			"#{github_namespace}/#{name}"
 		end
 
-		memoize def github_url
+		memoize def github_namespace_uri
+			"https://github.com/#{github_namespace}"
+		end
+
+		memoize def github_uri
 			"https://github.com/#{github_path}"
 		end
 

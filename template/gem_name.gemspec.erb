@@ -14,16 +14,18 @@ Gem::Specification.new do |spec|
 	DESC
 	spec.license = 'MIT'
 
-	spec.metadata = {
-		'source_code_uri' => '<%= github_url %>',
-		'documentation_uri' => "http://www.rubydoc.info/gems/<%= name %>/#{<%= version_constant %>}",
-		'bug_tracker_uri' => '<%= github_url %>/issues',
-		'changelog_uri' => '<%= github_url %>/blob/master/CHANGELOG.md'
-		'wiki_uri' => '<%= github_url %>/wiki'
-	}
+	github_uri = "<%= github_namespace_uri %>/#{spec.name}"
 
-	spec.metadata['homepage_uri'] = spec.metadata['source_code_uri']
-	spec.homepage = spec.metadata['homepage_uri']
+	spec.homepage = github_uri
+
+	spec.metadata = {
+		'bug_tracker_uri' => "#{github_uri}/issues",
+		'changelog_uri' => "#{github_uri}/blob/v#{spec.version}/CHANGELOG.md",
+		'documentation_uri' => "http://www.rubydoc.info/gems/#{spec.name}/#{spec.version}",
+		'homepage_uri' => spec.homepage,
+		'source_code_uri' => github_uri,
+		'wiki_uri' => "#{github_uri}/wiki"
+	}
 
 	spec.files = Dir['lib/**/*.rb', 'README.md', 'LICENSE.txt', 'CHANGELOG.md']
 
