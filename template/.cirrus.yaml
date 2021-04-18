@@ -40,7 +40,7 @@ bundle-audit_task:
 
 rubocop_task:
   container:
-    image: ruby:latest
+    image: ruby
   <<: *bundle_cache
 
   lint_script: bundle exec rubocop --format=json --out=rubocop.json
