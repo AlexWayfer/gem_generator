@@ -22,7 +22,10 @@ module GemGenerator
 		def execute
 			@directory = File.expand_path name
 
-			@render_variables = RenderVariables.new name, namespace
+			## Prevent error like '"FIXME" or "TODO" is not a description' for `bundle install`
+			summary = ask_for_summary
+
+			@render_variables = RenderVariables.new name, namespace, summary
 
 			copy_files
 
@@ -31,6 +34,8 @@ module GemGenerator
 			render_files
 
 			initialize_git
+
+			install_dependencies
 
 			puts 'Done.'
 
@@ -41,6 +46,25 @@ module GemGenerator
 		end
 
 		private
+
+		def ask_for_summary
+			require 'readline'
+
+			puts 'Please, write a summary for the gem:'
+
+			result = Readline.readline('> ', true)
+
+			puts <<~TEXT
+
+				Thank you! You can write more detailed description later for `spec.description` and `README.md`.
+
+			TEXT
+
+			## Give a time to read the hint about description
+			sleep 3
+
+			result
+		end
 
 		def copy_files
 			puts 'Copying files...'
@@ -81,6 +105,16 @@ module GemGenerator
 			Dir.chdir name do
 				system 'git init'
 				system 'git add .'
+			end
+		end
+
+		def install_dependencies
+			puts 'Installing dependencies...'
+
+			Dir.chdir name do
+				system 'bundle update'
+
+				system 'npm install'
 			end
 		end
 	end

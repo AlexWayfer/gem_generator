@@ -13,11 +13,12 @@ module GemGenerator
 		using GorillaPatch::Blank
 		using GorillaPatch::Inflections
 
-		attr_reader :name
+		attr_reader :name, :summary
 
-		def initialize(name, namespace_option)
+		def initialize(name, namespace_option, summary)
 			@name = name
 			@namespace_option = namespace_option
+			@summary = summary
 		end
 
 		## `public :binding` and `send :binding` return caller binding
@@ -27,6 +28,14 @@ module GemGenerator
 			binding
 		end
 		# rubocop:enable Naming/AccessorMethodName
+
+		memoize def summary_quotes
+			summary.include?("'") ? '"' : "'"
+		end
+
+		memoize def description
+			summary.match?(/[.?!]$/) ? summary : "#{summary}."
+		end
 
 		memoize def path
 			name.tr('-', '/')
