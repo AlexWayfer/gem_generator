@@ -14,16 +14,18 @@ Gem::Specification.new do |spec|
 
 	spec.required_ruby_version = '>= 2.5', '< 4'
 
-	source_code_uri = 'https://github.com/AlexWayfer/gem_generator'
+	github_uri = "https://github.com/AlexWayfer/#{spec.name}"
 
-	spec.homepage = source_code_uri
+	spec.homepage = github_uri
 
-	spec.metadata['source_code_uri'] = source_code_uri
-
-	spec.metadata['homepage_uri'] = spec.homepage
-
-	# spec.metadata['changelog_uri'] =
-	# 	'https://github.com/AlexWayfer/gem_generator/blob/master/CHANGELOG.md'
+	spec.metadata = {
+		'bug_tracker_uri' => "#{github_uri}/issues",
+		'changelog_uri' => "#{github_uri}/blob/v#{spec.version}/CHANGELOG.md",
+		# 'documentation_uri' => "http://www.rubydoc.info/gems/#{spec.name}/#{spec.version}",
+		'homepage_uri' => spec.homepage,
+		'source_code_uri' => github_uri
+		# 'wiki_uri' => "#{github_uri}/wiki"
+	}
 
 	files = %w[
 		lib/**/*.rb
