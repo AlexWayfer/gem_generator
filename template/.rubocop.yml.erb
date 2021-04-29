@@ -7,11 +7,13 @@ inherit_mode:
     - Include
     - Exclude
 
+<% if indentation == 'tabs' -%>
 Layout/IndentationStyle:
   EnforcedStyle: tabs
   IndentationWidth: 2
 Layout/IndentationWidth:
   Width: 1
+<% end -%>
 Layout/LineLength:
   Max: 100
 Layout/MultilineMethodCallIndentation:

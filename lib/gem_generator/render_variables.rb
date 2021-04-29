@@ -13,11 +13,12 @@ module GemGenerator
 		using GorillaPatch::Blank
 		using GorillaPatch::Inflections
 
-		attr_reader :name, :summary
+		attr_reader :name, :indentation, :summary
 
-		def initialize(name, namespace_option, summary)
+		def initialize(name, namespace_option, indentation, summary)
 			@name = name
 			@namespace_option = namespace_option
+			@indentation = indentation
 			@summary = summary
 		end
 

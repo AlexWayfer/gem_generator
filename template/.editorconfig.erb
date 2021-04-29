@@ -1,7 +1,11 @@
 root = true
 
 [*]
+<% if indentation == 'tabs' -%>
 indent_style = tab
+<% else -%>
+indent_style = space
+<% end -%>
 indent_size = 2
 end_of_line = lf
 charset = utf-8

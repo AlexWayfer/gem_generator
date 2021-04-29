@@ -13,6 +13,15 @@ module GemGenerator
 		parameter 'NAME', 'name of a new gem'
 
 		option ['-n', '--namespace'], 'NAME', 'use NAME as repository namespace'
+		option ['-i', '--indentation'], 'TYPE', 'type of indentation (tabs or spaces)',
+			default: 'tabs' do |value|
+				## TODO: Add something like `:variants` to Clamp
+				unless %w[tabs spaces].include? value
+					raise ArgumentError, 'Only `tabs` or `spaces` values acceptable'
+				end
+
+				value
+			end
 
 		attr_reader(
 			:path, :title, :modules, :version_constant, :github_path, :github_uri,
@@ -25,7 +34,7 @@ module GemGenerator
 			## Prevent error like '"FIXME" or "TODO" is not a description' for `bundle install`
 			summary = ask_for_summary
 
-			@render_variables = RenderVariables.new name, namespace, summary
+			@render_variables = RenderVariables.new name, namespace, indentation, summary
 
 			copy_files
 
@@ -92,9 +101,21 @@ module GemGenerator
 			puts 'Rendering files...'
 
 			Dir.glob("#{@directory}/**/*.erb", File::FNM_DOTMATCH).each do |template_file|
+				## Read a template file content and render it
+				content =
+					ERB.new(File.read(template_file), trim_mode: '-')
+						.result(@render_variables.get_binding)
+
+				## Replace tabs with spaces if necessary
+				content.gsub!(/^\t+/) { |tabs| '  ' * tabs.count("\t") } if indentation == 'spaces'
+
+				## Render variables in file name
 				real_pathname = Pathname.new(template_file).sub_ext('')
-				content = ERB.new(File.read(template_file)).result(@render_variables.get_binding)
+
+				## Save rendered file
 				File.write real_pathname, content
+
+				## Remove original template file
 				FileUtils.rm template_file
 			end
 		end
