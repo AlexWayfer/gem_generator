@@ -1,5 +1,5 @@
 # Changelog
 
-## master (unreleased)
+## main (unreleased)
 
 *   Initial release.
