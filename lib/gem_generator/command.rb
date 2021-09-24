@@ -11,6 +11,7 @@ module GemGenerator
 	## Main CLI command for Gem Generator
 	class Command < Clamp::Command
 		parameter 'NAME', 'name of a new gem'
+		parameter 'TEMPLATE', 'template path of a new gem'
 
 		option ['-n', '--namespace'], 'NAME', 'use NAME as repository namespace'
 		option ['-i', '--indentation'], 'TYPE', 'type of indentation (tabs or spaces)',
@@ -31,6 +32,8 @@ module GemGenerator
 		def execute
 			@directory = File.expand_path name
 
+			signal_usage_error 'the target directory already exists' if Dir.exist? @directory
+
 			## Prevent error like '"FIXME" or "TODO" is not a description' for `bundle install`
 			summary = ask_for_summary
 
@@ -42,9 +45,11 @@ module GemGenerator
 
 			render_files
 
-			initialize_git
-
 			install_dependencies
+
+			## If there is no `gem_generator` config — `render` asks `git config`
+			## Also do `git add .` after all renders
+			initialize_git
 
 			puts 'Done.'
 
@@ -78,7 +83,9 @@ module GemGenerator
 		def copy_files
 			puts 'Copying files...'
 
-			FileUtils.cp_r "#{__dir__}/../../template", @directory
+			FileUtils.cp_r template, @directory
+
+			FileUtils.rm_rf "#{@directory}/.git"
 		end
 
 		def rename_files
