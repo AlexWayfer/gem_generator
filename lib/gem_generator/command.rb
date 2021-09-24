@@ -103,8 +103,7 @@ module GemGenerator
 			Dir.glob("#{@directory}/**/*.erb", File::FNM_DOTMATCH).each do |template_file|
 				## Read a template file content and render it
 				content =
-					ERB.new(File.read(template_file), trim_mode: '-')
-						.result(@render_variables.get_binding)
+					ERB.new(File.read(template_file), trim_mode: '-').result(@render_variables.get_binding)
 
 				## Replace tabs with spaces if necessary
 				content.gsub!(/^\t+/) { |tabs| '  ' * tabs.count("\t") } if indentation == 'spaces'
