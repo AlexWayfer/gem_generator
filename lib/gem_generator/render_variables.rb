@@ -103,7 +103,10 @@ module GemGenerator
 		end
 
 		memoize def config
-			YAML.load_file find_config_file
+			config_file = find_config_file
+			return {} unless config_file
+
+			YAML.load_file config_file
 		end
 
 		def find_config_file
