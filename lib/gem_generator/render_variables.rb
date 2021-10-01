@@ -66,6 +66,12 @@ module GemGenerator
 			"https://github.com/#{github_path}"
 		end
 
+		EXAMPLE_VALUES = {
+			name: 'My Name',
+			email: 'my.email@example.com'
+		}.freeze
+		private_constant :EXAMPLE_VALUES
+
 		%i[name email].each do |property|
 			method_name = "author_#{property}"
 
@@ -76,7 +82,7 @@ module GemGenerator
 
 				abort <<~TEXT
 					You have to specify project's author #{property}.
-					You can use `git config --set user.#{property}`, or create a configuration file.
+					You can use `git config user.#{property} "#{EXAMPLE_VALUES[property]}"`, or create a configuration file.
 					Check the README.
 				TEXT
 			end

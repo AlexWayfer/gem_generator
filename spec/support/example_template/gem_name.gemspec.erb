@@ -1,0 +1,24 @@
+# frozen_string_literal: true
+
+require_relative 'lib/<%= path %>/version'
+
+Gem::Specification.new do |spec|
+	spec.name        = '<%= name %>'
+	spec.version     = <%= version_constant %>
+	spec.authors     = ['<%= author_name %>']
+	spec.email       = ['<%= author_email %>']
+
+	spec.summary     = <%= summary_quotes %><%= summary %><%= summary_quotes %>
+	spec.description = <<~DESC
+		<%= description %>
+	DESC
+	spec.license = 'MIT'
+
+	github_uri = "<%= github_namespace_uri %>/#{spec.name}"
+
+	spec.homepage = github_uri
+
+	spec.files = Dir['lib/**/*.rb', 'README.md', 'LICENSE.txt', 'CHANGELOG.md']
+
+	spec.required_ruby_version = '>= 2.5', '< 4'
+end

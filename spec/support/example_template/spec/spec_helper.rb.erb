@@ -1,0 +1,14 @@
+# frozen_string_literal: true
+
+require 'pry-byebug'
+
+require 'simplecov'
+
+if ENV['CI']
+	require 'codecov'
+	SimpleCov.formatter = SimpleCov::Formatter::Codecov
+end
+
+SimpleCov.start
+
+require_relative '../lib/<%= path %>'

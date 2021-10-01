@@ -7,6 +7,9 @@ require 'pathname'
 
 require_relative 'render_variables'
 
+## https://github.com/mdub/clamp#allowing-options-after-parameters
+Clamp.allow_options_after_parameters = true
+
 module GemGenerator
 	## Main CLI command for Gem Generator
 	class Command < Clamp::Command
@@ -35,15 +38,11 @@ module GemGenerator
 			signal_usage_error 'the target directory already exists' if Dir.exist? @directory
 
 			## Prevent error like '"FIXME" or "TODO" is not a description' for `bundle install`
-			summary = ask_for_summary
-
-			@render_variables = RenderVariables.new name, namespace, indentation, summary
+			@summary = ask_for_summary
 
 			copy_files
 
-			rename_files
-
-			render_files
+			render_files_and_file_names
 
 			install_dependencies
 
@@ -104,6 +103,19 @@ module GemGenerator
 				end
 		end
 
+		def render_files_and_file_names
+			@render_variables = RenderVariables.new name, namespace, indentation, @summary
+
+			rename_files
+
+			begin
+				render_files
+			rescue SystemExit => e
+				FileUtils.rm_r @directory
+				raise e
+			end
+		end
+
 		def render_files
 			puts 'Rendering files...'
 
@@ -141,7 +153,7 @@ module GemGenerator
 			Dir.chdir name do
 				system 'bundle update'
 
-				system 'npm install'
+				system 'npm install' if File.exist? 'package.json'
 			end
 		end
 	end

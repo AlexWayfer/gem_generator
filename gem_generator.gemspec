@@ -50,11 +50,12 @@ Gem::Specification.new do |spec|
 
 	spec.add_development_dependency 'bundler-audit', '~> 0.9.0'
 
-	# spec.add_development_dependency 'codecov', '~> 0.5.1'
-	# spec.add_development_dependency 'rspec', '~> 3.9'
-	# spec.add_development_dependency 'simplecov', '~> 0.21.0'
+	spec.add_development_dependency 'codecov', '~> 0.6.0'
+	spec.add_development_dependency 'ffaker', '~> 2.19'
+	spec.add_development_dependency 'rspec', '~> 3.9'
+	spec.add_development_dependency 'simplecov', '~> 0.21.0'
 
-	spec.add_development_dependency 'rubocop', '~> 1.21.0'
+	spec.add_development_dependency 'rubocop', '~> 1.22.0'
 	spec.add_development_dependency 'rubocop-performance', '~> 1.0'
 	spec.add_development_dependency 'rubocop-rspec', '~> 2.0'
 end

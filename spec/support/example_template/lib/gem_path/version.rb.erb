@@ -1,0 +1,14 @@
+# frozen_string_literal: true
+<%
+	modules.map.with_index do |module_name, index|
+%>
+<%= "\t" * index %>module <%= module_name %><%
+	end
+%>
+<%= "\t" * modules.size %>VERSION = '0.0.0'<%
+	modules.size.times do |index|
+		reverse_index = modules.size - index.next
+%>
+<%= "\t" * reverse_index %>end<%
+	end
+%>
