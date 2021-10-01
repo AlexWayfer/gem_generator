@@ -74,7 +74,7 @@ module GemGenerator
 			TEXT
 
 			## Give a time to read the hint about description
-			sleep 3
+			# sleep 3
 
 			result
 		end
