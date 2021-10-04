@@ -5,6 +5,12 @@ require 'pry-byebug'
 require 'ffaker'
 
 require 'simplecov'
+
+if ENV['CI']
+	require 'simplecov-cobertura'
+	SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
+end
+
 SimpleCov.start
 
 RSpec::Matchers.define :include_lines do |expected_lines|
