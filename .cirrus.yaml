@@ -46,3 +46,32 @@ rubocop_task:
       '.cirrus.yaml', 'Gemfile', 'Rakefile', '.rubocop.yml', '*.gemspec',
       '**.rb', '**.ru'
     )
+
+rspec_task:
+  depends_on:
+    - remark
+    - bundle-audit
+    - rubocop
+
+  container:
+    matrix:
+      - image: ruby:2.5
+      - image: ruby:2.6
+      - image: ruby:2.7
+      - image: ruby:3.0
+
+  <<: *bundle_cache
+
+  test_script: bundle exec rspec --format=json --out=rspec.json
+
+  always:
+    rspec_artifacts:
+      path: rspec.json
+      type: text/json
+      format: rspec
+
+  only_if: ($CIRRUS_BRANCH == 'main') ||
+    changesInclude(
+      '.cirrus.yaml', '.gitignore', 'Gemfile', '.rspec', '*.gemspec', 'lib/**',
+      'spec/**'
+    )
