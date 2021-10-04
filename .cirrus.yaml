@@ -78,7 +78,7 @@ rspec_task:
   codecov_script:
     - curl -Os https://uploader.codecov.io/latest/linux/codecov
     - chmod +x codecov
-    - ./codecov -t ${CODECOV_TOKEN} --dir=coverage/
+    - ./codecov -t ${CODECOV_TOKEN}
 
   always:
     rspec_artifacts:
