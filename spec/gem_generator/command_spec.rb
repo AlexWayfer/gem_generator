@@ -295,6 +295,15 @@ describe GemGenerator::Command do
 										not_include_lines(not_expected_lines)
 									)
 								end
+
+								describe '.gemspec indentation' do
+									subject(:file_content) do
+										File.read(File.join(Dir.pwd, gem_name, "#{gem_name}.gemspec"))
+									end
+
+									it { is_expected.to match(/^\tspec.license = 'MIT'$/) }
+									it { is_expected.not_to match(/^  /) }
+								end
 							end
 
 							context 'with spaces indentation' do
@@ -320,6 +329,15 @@ describe GemGenerator::Command do
 									expect(file_content).to include_lines(expected_lines).and(
 										not_include_lines(not_expected_lines)
 									)
+								end
+
+								describe '.gemspec indentation' do
+									subject(:file_content) do
+										File.read(File.join(Dir.pwd, gem_name, "#{gem_name}.gemspec"))
+									end
+
+									it { is_expected.to match(/^  spec.license = 'MIT'$/) }
+									it { is_expected.not_to match(/^\t/) }
 								end
 							end
 						end
