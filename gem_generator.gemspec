@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+require_relative 'lib/gem_generator/version'
+
 Gem::Specification.new do |spec|
 	spec.name        = 'gem_generator'
-	spec.version     = '0.1.0'
+	spec.version     = GemGenerator::VERSION
 	spec.authors     = ['Alexander Popov']
 	spec.email       = ['alex.wayfer@gmail.com']
 
