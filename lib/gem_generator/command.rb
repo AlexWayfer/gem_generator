@@ -130,11 +130,11 @@ module GemGenerator
 				## Render variables in file name
 				real_pathname = Pathname.new(template_file).sub_ext('')
 
-				## Save rendered file
-				File.write real_pathname, content
+				## Rename template file
+				File.rename template_file, real_pathname
 
-				## Remove original template file
-				FileUtils.rm template_file
+				## Update file content
+				File.write real_pathname, content
 			end
 		end
 

@@ -341,6 +341,24 @@ describe GemGenerator::Command do
 								end
 							end
 						end
+
+						describe 'bin/console.erb' do
+							describe 'permissions' do
+								subject(:file_permissions) do
+									File.stat(File.join(Dir.pwd, gem_name, 'bin/console')).mode
+								end
+
+								let(:expected_permissions) do
+									File.stat("#{template}/bin/console.erb").mode
+								end
+
+								before do
+									run ## parent subject with generation
+								end
+
+								it { is_expected.to eq expected_permissions }
+							end
+						end
 					end
 				end
 
