@@ -46,6 +46,10 @@ module GemGenerator
 			name.split(/[-_]/).map(&:camelize).join(' ')
 		end
 
+		memoize def module_name
+			path.camelize
+		end
+
 		memoize def modules
 			module_name.split('::')
 		end
@@ -91,10 +95,6 @@ module GemGenerator
 		end
 
 		private
-
-		memoize def module_name
-			path.camelize
-		end
 
 		memoize def github_namespace
 			result = @namespace_option || config[:namespace]
