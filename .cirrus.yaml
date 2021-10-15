@@ -88,13 +88,10 @@ rspec_task:
 
   test_script: bundle exec rspec --format=json --out=rspec.json
 
-  env:
-    CODECOV_TOKEN: ENCRYPTED[1ea90ca007d7a15046d2fd91cb16b85c475603e27341f847c0b7fb063e9b273a49c3f7230ce57940d6fa0f169f5d39fd]
-
   codecov_script:
     - curl -Os https://uploader.codecov.io/latest/linux/codecov
     - chmod +x codecov
-    - ./codecov -t ${CODECOV_TOKEN}
+    - ./codecov
 
   always:
     rspec_artifacts:
