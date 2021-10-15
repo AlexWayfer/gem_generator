@@ -87,10 +87,15 @@ rspec_task:
 
   test_script: bundle exec rspec
 
-  codecov_script:
-    - curl -Os https://uploader.codecov.io/latest/linux/codecov
-    - chmod +x codecov
-    - ./codecov
+  codecov_uploader_cache:
+    folder: ./codecov
+    fingerprint_script:
+      - curl https://uploader.codecov.io/latest/linux/codecov.SHA256SUM
+    populate_script:
+      - curl -O https://uploader.codecov.io/latest/linux/codecov
+      - chmod +x codecov
+
+  codecov_script: ./codecov
 
   only_if: ($CIRRUS_BRANCH == 'main') ||
     changesInclude(
