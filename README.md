@@ -24,13 +24,13 @@ gem install gem_generator
 ### With local template
 
 ```sh
-gem_generator --namespace=github_nickname name_of_a_new_gem path/to/template
+gem_generator --namespace=your_github_nickname name_of_a_new_gem path/to/template
 ```
 
 ### With GitHub template
 
 ```sh
-gem_generator --namespace=github_nickname name_of_a_new_gem github_namespace/template_repo_name
+gem_generator --namespace=your_github_nickname name_of_a_new_gem template_github_org/template_github_repo
 ```
 
 Be aware: `gem_generator` uses `template/` directory from the GitHub repo, not the root one.
