@@ -22,9 +22,21 @@ gem install gem_generator
 
 ## Usage
 
+### With local template
+
 ```sh
-gem_generator --namespace=github_nickname name_of_a_new_gem
+gem_generator --namespace=github_nickname name_of_a_new_gem path/to/template
 ```
+
+### With GitHub template
+
+```sh
+gem_generator --namespace=github_nickname name_of_a_new_gem github_namespace/template_repo_name
+```
+
+Be aware: `gem_generator` uses `template/` directory from the GitHub repo, not the root one.
+
+### Config file
 
 You can create a config file, `.gem_generator.yaml` (or `.yml`) like this:
 
@@ -41,6 +53,50 @@ You can create a config file, `.gem_generator.yaml` (or `.yml`) like this:
 Gem Generator will look for it in each directory from current to the root,
 so the common place for it in the home directory, but you can redefine it,
 for example, in some directory for work projects.
+
+## Template creation
+
+Example of gem template you can see at [AlexWayfer/gem_template](https://github.com/AlexWayfer/gem_template).
+
+Available paths:
+
+| Path part  | Example of source             | Example of result                      |
+| ---------- | ----------------------------- | -------------------------------------- |
+| `gem_name` | `gem_name.gemspec`            | `faraday-my_middleware.gemspec`        |
+| `gem_path` | `lib/gem_path/version.rb.erb` | `lib/faraday/my_middleware/version.rb` |
+
+Any `*.erb` file will be rendered via [ERB](https://ruby-doc.org/stdlib/libdoc/erb/rdoc/ERB.html);
+if you want an `*.erb` file as result — name it as `*.erb.erb` (even if there are no tags).
+
+Available variables:
+
+| Variable               | Example of result                                      |
+| ---------------------- | ------------------------------------------------------ |
+| `name`                 | `faraday-my_middleware`                                |
+| `title`                | `Faraday My Middleware`                                |
+| `path`                 | `faraday/my_middleware`                                |
+| `module_name`          | `Faraday::MyMiddleware`                                |
+| `modules`              | `['Faraday', 'MyMiddleware']`                          |
+| `version_constant`     | `Faraday::MyMiddleware::VERSION`                       |
+| `summary`              | asked from user                                        |
+| `summary_quotes`       | `'` or `"`, depending on `'` inside `summary`          |
+| `description`          | by default is `summary` with guaranteed dot at the end |
+| `indentation`          | `tabs` or `spaces`, as user specified by option        |
+| `github_path`          | `AlexWayfer/faraday-my_middleware`                     |
+| `github_namespace_uri` | `https://github.com/AlexWayfer`                        |
+| `github_uri`           | `https://github.com/AlexWayfer/faraday-my_middleware`  |
+| `author_name`          | `Alexander Popov`                                      |
+| `author_email`         | `alex.wayfer@gmail.com`                                |
+
+By default indentation is `tabs`, but if a template spaces-indented — option will not affect.
+So, this option only for tabs-indented templates.
+
+### Git templates
+
+You can create public git-templates and then guide users to call
+`gem_generator gem_game your_org/your_repo --git`, but be aware that `gem_generator` will look
+for template inside `template/` directory to allow you having out-of-template README,
+specs (for the template itself), anything else.
 
 ## Development
 
