@@ -20,6 +20,9 @@ module GemGenerator
 			@namespace_option = namespace_option
 			@indentation = indentation
 			@summary = summary
+
+			## Call to be sure that this is checked before author fields
+			github_namespace
 		end
 
 		## `public :binding` and `send :binding` return caller binding
