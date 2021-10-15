@@ -27,6 +27,9 @@ module GemGenerator
 				value
 			end
 
+		option '--git', :flag, 'use TEMPLATE as GitHub path (clone and generate from it)',
+			default: false
+
 		attr_reader(
 			:path, :title, :modules, :version_constant, :github_path, :github_uri,
 			:author_name, :author_email
@@ -40,15 +43,17 @@ module GemGenerator
 			## Prevent error like '"FIXME" or "TODO" is not a description' for `bundle install`
 			@summary = ask_for_summary
 
-			copy_files
+			refine_template_parameter if git?
 
-			render_files_and_file_names
+			process_files
 
 			install_dependencies
 
 			## If there is no `gem_generator` config — `render` asks `git config`
 			## Also do `git add .` after all renders
 			initialize_git
+
+			FileUtils.rm_r @git_tmp_dir if git?
 
 			puts 'Done.'
 
@@ -79,6 +84,27 @@ module GemGenerator
 			result
 		end
 
+		def refine_template_parameter
+			@git_tmp_dir = Dir.mktmpdir
+			`git clone -q https://github.com/#{template}.git #{@git_tmp_dir}`
+			self.template = File.join @git_tmp_dir, 'template'
+		end
+
+		def process_files
+			copy_files
+
+			begin
+				@render_variables = RenderVariables.new name, namespace, indentation, @summary
+
+				rename_files
+
+				render_files
+			rescue SystemExit => e
+				FileUtils.rm_r @directory
+				raise e
+			end
+		end
+
 		def copy_files
 			puts 'Copying files...'
 
@@ -101,19 +127,6 @@ module GemGenerator
 						File.rename file_name, new_file_name
 					end
 				end
-		end
-
-		def render_files_and_file_names
-			@render_variables = RenderVariables.new name, namespace, indentation, @summary
-
-			rename_files
-
-			begin
-				render_files
-			rescue SystemExit => e
-				FileUtils.rm_r @directory
-				raise e
-			end
 		end
 
 		def render_files

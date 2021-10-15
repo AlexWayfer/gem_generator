@@ -46,11 +46,13 @@ Gem::Specification.new do |spec|
 
 	spec.add_development_dependency 'pry-byebug', '~> 3.9'
 
-	spec.add_development_dependency 'bundler', '~> 2.0'
-	spec.add_development_dependency 'gem_toys', '~> 0.9.0'
-	spec.add_development_dependency 'toys', '~> 0.12.0'
+	spec.add_development_dependency 'inifile', '~> 3.0'
 
+	spec.add_development_dependency 'bundler', '~> 2.0'
 	spec.add_development_dependency 'bundler-audit', '~> 0.9.0'
+
+	spec.add_development_dependency 'gem_toys', '~> 0.10.0'
+	spec.add_development_dependency 'toys', '~> 0.12.0'
 
 	spec.add_development_dependency 'ffaker', '~> 2.19'
 	spec.add_development_dependency 'rspec', '~> 3.9'
