@@ -147,12 +147,17 @@ describe GemGenerator::Command do
 									"require_relative 'lib/#{gem_name}/version'",
 									"spec.name        = '#{gem_name}'",
 									'spec.version     = FooBar::VERSION',
-									"spec.authors     = ['#{author_name}']",
+									"spec.authors     = [#{author_name_string}]",
 									"spec.email       = ['#{author_email}']",
 									"spec.summary     = #{gem_summary_string}",
 									gem_description_string,
 									"github_uri = \"https://github.com/#{namespace}/\#{spec.name}\""
 								]
+							end
+
+							let(:author_name_string) do
+								author_name_quotes = author_name.include?("'") ? '"' : "'"
+								"#{author_name_quotes}#{author_name}#{author_name_quotes}"
 							end
 
 							context 'without dot in gem summary' do
@@ -461,6 +466,20 @@ describe GemGenerator::Command do
 						include_examples 'target directory does not exist'
 					end
 
+					shared_examples 'when author names with apostrophe and without' do
+						context 'when author name does not include apostrophe' do
+							let(:author_name) { 'Erica Johns' }
+
+							include_examples 'correct behavior with all data'
+						end
+
+						context 'when author name includes apostrophe' do
+							let(:author_name) { "Lynda O'Kon" }
+
+							include_examples 'correct behavior with all data'
+						end
+					end
+
 					context 'without config file' do
 						before do
 							# render_variables_double = instance_double GemGenerator::RenderVariables
@@ -498,20 +517,18 @@ describe GemGenerator::Command do
 								end
 
 								context 'with author name from git' do
-									let(:author_name) do
-										FFaker::Name.name
-									end
-
 									include_context 'with changing git user config', :name do
 										let(:temp_git_name) { author_name }
 									end
 
-									include_examples 'correct behavior with all data'
+									include_examples 'when author names with apostrophe and without'
 
 									context 'with incorrect indentation option' do
 										let(:args) do
 											[*super(), '--indentation=foo']
 										end
+
+										let(:author_name) { 'Erica Johns' }
 
 										specify do
 											expect { run }.to(
@@ -560,25 +577,21 @@ describe GemGenerator::Command do
 											super().deep_merge(author: { name: author_name })
 										end
 
-										let(:author_name) { FFaker::Name.name }
-
 										## It should be different and with lower priority
 										include_context 'with changing git user config', :name do
 											let(:temp_git_name) { FFaker::Name.name }
 										end
 
-										include_examples 'correct behavior with all data'
+										include_examples 'when author names with apostrophe and without'
 									end
 
 									context 'without author name in config file' do
 										context 'with author name from git' do
-											let(:author_name) { FFaker::Name.name }
-
 											include_context 'with changing git user config', :name do
 												let(:temp_git_name) { author_name }
 											end
 
-											include_examples 'correct behavior with all data'
+											include_examples 'when author names with apostrophe and without'
 										end
 
 										context 'without author name from git' do

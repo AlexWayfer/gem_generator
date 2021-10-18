@@ -69,23 +69,24 @@ if you want an `*.erb` file as result — name it as `*.erb.erb` (even if there 
 
 Available variables:
 
-| Variable               | Example of result                                      |
-| ---------------------- | ------------------------------------------------------ |
-| `name`                 | `faraday-my_middleware`                                |
-| `title`                | `Faraday My Middleware`                                |
-| `path`                 | `faraday/my_middleware`                                |
-| `module_name`          | `Faraday::MyMiddleware`                                |
-| `modules`              | `['Faraday', 'MyMiddleware']`                          |
-| `version_constant`     | `Faraday::MyMiddleware::VERSION`                       |
-| `summary`              | asked from user                                        |
-| `summary_quotes`       | `'` or `"`, depending on `'` inside `summary`          |
-| `description`          | by default is `summary` with guaranteed dot at the end |
-| `indentation`          | `tabs` or `spaces`, as user specified by option        |
-| `github_path`          | `AlexWayfer/faraday-my_middleware`                     |
-| `github_namespace_uri` | `https://github.com/AlexWayfer`                        |
-| `github_uri`           | `https://github.com/AlexWayfer/faraday-my_middleware`  |
-| `author_name`          | `Alexander Popov`                                      |
-| `author_email`         | `alex.wayfer@gmail.com`                                |
+| Variable               | Example of result                                          |
+| ---------------------- | ---------------------------------------------------------- |
+| `name`                 | `faraday-my_middleware`                                    |
+| `title`                | `Faraday My Middleware`                                    |
+| `path`                 | `faraday/my_middleware`                                    |
+| `module_name`          | `Faraday::MyMiddleware`                                    |
+| `modules`              | `['Faraday', 'MyMiddleware']`                              |
+| `version_constant`     | `Faraday::MyMiddleware::VERSION`                           |
+| `summary`              | asked from user                                            |
+| `summary_string`       | summary wrapped in `'` or `"`, depending on `'` inside     |
+| `description`          | by default is `summary` with guaranteed dot at the end     |
+| `indentation`          | `tabs` or `spaces`, as user specified by option            |
+| `github_path`          | `AlexWayfer/faraday-my_middleware`                         |
+| `github_namespace_uri` | `https://github.com/AlexWayfer`                            |
+| `github_uri`           | `https://github.com/AlexWayfer/faraday-my_middleware`      |
+| `author_name`          | `Alexander Popov`                                          |
+| `author_name_string`   | author name wrapped in `'` or `"`, depending on `'` inside |
+| `author_email`         | `alex.wayfer@gmail.com`                                    |
 
 By default indentation is `tabs`, but if a template spaces-indented — option will not affect.
 So, this option only for tabs-indented templates.

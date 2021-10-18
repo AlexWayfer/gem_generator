@@ -33,8 +33,9 @@ module GemGenerator
 		end
 		# rubocop:enable Naming/AccessorMethodName
 
-		memoize def summary_quotes
-			summary.include?("'") ? '"' : "'"
+		memoize def summary_string
+			quote = summary.include?("'") ? '"' : "'"
+			"#{quote}#{summary}#{quote}"
 		end
 
 		memoize def description
@@ -95,6 +96,11 @@ module GemGenerator
 			end
 
 			memoize method_name
+		end
+
+		memoize def author_name_string
+			quote = author_name.include?("'") ? '"' : "'"
+			"#{quote}#{author_name}#{quote}"
 		end
 
 		private

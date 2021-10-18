@@ -5,10 +5,10 @@ require_relative 'lib/<%= path %>/version'
 Gem::Specification.new do |spec|
 	spec.name        = '<%= name %>'
 	spec.version     = <%= version_constant %>
-	spec.authors     = ['<%= author_name %>']
+	spec.authors     = [<%= author_name_string %>]
 	spec.email       = ['<%= author_email %>']
 
-	spec.summary     = <%= summary_quotes %><%= summary %><%= summary_quotes %>
+	spec.summary     = <%= summary_string %>
 	spec.description = <<~DESC
 		<%= description %>
 	DESC
