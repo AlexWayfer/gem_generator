@@ -745,8 +745,32 @@ describe GemGenerator::Command do
 				end
 
 				context 'with `--git` option (for template)' do
-					let(:template) { 'AlexWayfer/gem_template' }
+					template = 'AlexWayfer/gem_template'
+
+					let(:template) { template }
 					let(:args) { [*super(), '--git'] }
+
+					## Speed up tests
+					git_template_cache = Dir.mktmpdir
+					git_source = "https://github.com/#{template}.git"
+					system "git clone -q #{git_source} #{git_template_cache}"
+
+					before do
+						allow(command_instance).to receive(:`).and_call_original
+
+						allow(command_instance).to receive(:`).with(
+							a_string_starting_with("git clone -q #{git_source} ")
+						) do |command|
+							target_directory = command.split.last
+							FileUtils.copy_entry git_template_cache, target_directory
+						end
+					end
+
+					# rubocop:disable RSpec/BeforeAfterAll
+					after :all do
+						FileUtils.rm_r git_template_cache
+					end
+					# rubocop:enable RSpec/BeforeAfterAll
 
 					shared_examples 'correct system calls with all data' do
 						include_examples 'common correct system calls with all data'
