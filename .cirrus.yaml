@@ -90,7 +90,7 @@ rspec_task:
   codecov_uploader_cache:
     folder: ./codecov
     fingerprint_script:
-      - curl https://uploader.codecov.io/latest/linux/codecov.SHA256SUM
+      - curl --no-progress-meter https://uploader.codecov.io/latest/linux/codecov.SHA256SUM
     populate_script:
       - curl -O https://uploader.codecov.io/latest/linux/codecov
       - chmod +x codecov
