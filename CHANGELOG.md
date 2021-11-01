@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 0.3.0 (2021-11-01)
+
+*   Install Bundler template dependencies from unbundled environment.
+    It should fix issues with templates specs, [example](https://github.com/lostisland/faraday-middleware-template/pull/3).
+*   Speed up tests about `--git` option.
+*   Update development dependencies.
+
 ## 0.2.0 (2021-10-18)
 
 *   Add `--git` option.
