@@ -164,7 +164,10 @@ module GemGenerator
 			puts 'Installing dependencies...'
 
 			Dir.chdir name do
-				system 'bundle update'
+				## Helpful for specs of templates, probably somewhere else
+				Bundler.with_unbundled_env do
+					system 'bundle update'
+				end
 
 				system 'npm install' if File.exist? 'package.json'
 			end
