@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 0.3.1 (2021-11-07)
+
+*   Require runtime depepndencies.
+
 ## 0.3.0 (2021-11-01)
 
 *   Install Bundler template dependencies from unbundled environment.
