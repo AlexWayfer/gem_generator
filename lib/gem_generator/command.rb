@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
+require 'bundler'
 require 'clamp'
 require 'erb'
 require 'fileutils'
 require 'pathname'
+require 'tmpdir'
 
 require_relative 'command/process_files'
 
