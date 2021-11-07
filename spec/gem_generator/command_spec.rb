@@ -530,16 +530,18 @@ describe GemGenerator::Command do
 
 										let(:author_name) { 'Erica Johns' }
 
-										specify do
-											expect { run }.to(
-												raise_error(SystemExit).and(
-													not_output.to_stdout.and(
-														output(<<~OUTPUT).to_stderr
-															ERROR: option '--indentation': Only `tabs` or `spaces` values acceptable
+										let(:expected_stderr) do
+											<<~OUTPUT
+												ERROR: option '--indentation': Only `tabs` or `spaces` values acceptable
 
-															See: 'gem_generator --help'
-														OUTPUT
-													)
+												See: 'gem_generator --help'
+											OUTPUT
+										end
+
+										specify do
+											expect { run }.to raise_error(SystemExit).and(
+												not_output.to_stdout.and(
+													output(expected_stderr).to_stderr
 												)
 											)
 										end
