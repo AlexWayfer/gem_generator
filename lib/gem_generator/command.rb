@@ -34,11 +34,6 @@ module GemGenerator
 		option '--git', :flag, 'use TEMPLATE as GitHub path (clone and generate from it)',
 			default: false
 
-		attr_reader(
-			:path, :title, :modules, :version_constant, :github_path, :github_uri,
-			:author_name, :author_email
-		)
-
 		def execute
 			@directory = File.expand_path name
 
