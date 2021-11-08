@@ -40,10 +40,9 @@ Gem::Specification.new do |spec|
 	spec.bindir = 'exe'
 	spec.executables.concat %w[gem_generator]
 
-	spec.add_runtime_dependency 'alt_memery', '~> 2.0'
 	spec.add_runtime_dependency 'bundler', '~> 2.0'
-	spec.add_runtime_dependency 'clamp', '~> 1.3'
 	spec.add_runtime_dependency 'gorilla_patch', '~> 4.0'
+	spec.add_runtime_dependency 'project_generator', '~> 0.1.0'
 
 	spec.add_development_dependency 'pry-byebug', '~> 3.9'
 

@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 require 'bundler'
-require 'clamp'
-require 'erb'
-require 'fileutils'
-require 'pathname'
-require 'tmpdir'
+require 'project_generator'
 
 require_relative 'command/process_files'
 
@@ -14,30 +10,13 @@ Clamp.allow_options_after_parameters = true
 
 module GemGenerator
 	## Main CLI command for Gem Generator
-	class Command < Clamp::Command
+	class Command < ProjectGenerator::Command
 		include ProcessFiles
 
-		parameter 'NAME', 'name of a new gem'
-		parameter 'TEMPLATE', 'template path of a new gem'
-
 		option ['-n', '--namespace'], 'NAME', 'use NAME as repository namespace'
-		option ['-i', '--indentation'], 'TYPE', 'type of indentation (tabs or spaces)',
-			default: 'tabs' do |value|
-				## TODO: Add something like `:variants` to Clamp
-				unless %w[tabs spaces].include? value
-					raise ArgumentError, 'Only `tabs` or `spaces` values acceptable'
-				end
-
-				value
-			end
-
-		option '--git', :flag, 'use TEMPLATE as GitHub path (clone and generate from it)',
-			default: false
 
 		def execute
-			@directory = File.expand_path name
-
-			signal_usage_error 'the target directory already exists' if Dir.exist? @directory
+			check_target_directory
 
 			## Prevent error like '"FIXME" or "TODO" is not a description' for `bundle install`
 			@summary = ask_for_summary
@@ -48,18 +27,11 @@ module GemGenerator
 
 			install_dependencies
 
-			## If there is no `gem_generator` config — `render` asks `git config`
-			## Also do `git add .` after all renders
 			initialize_git
 
 			FileUtils.rm_r @git_tmp_dir if git?
 
-			puts 'Done.'
-
-			puts <<~HELP
-				To checkout into a new directory:
-					cd #{name}
-			HELP
+			done
 		end
 
 		private
@@ -81,21 +53,6 @@ module GemGenerator
 			# sleep 3
 
 			result
-		end
-
-		def refine_template_parameter
-			@git_tmp_dir = Dir.mktmpdir
-			`git clone -q https://github.com/#{template}.git #{@git_tmp_dir}`
-			self.template = File.join @git_tmp_dir, 'template'
-		end
-
-		def initialize_git
-			puts 'Initializing git...'
-
-			Dir.chdir name do
-				system 'git init'
-				system 'git add .'
-			end
 		end
 
 		def install_dependencies

@@ -1,41 +1,27 @@
 # frozen_string_literal: true
 
-require 'yaml'
-require 'memery'
 require 'gorilla_patch/blank'
-require 'gorilla_patch/inflections'
 
 module GemGenerator
 	## Main CLI command for Gem Generator
-	class Command < Clamp::Command
+	class Command < ProjectGenerator::Command
 		## Private instance methods for processing template files (copying, renaming, rendering)
 		module ProcessFiles
 			## Class for a single object which should be a scope in render
-			class RenderVariables
-				include Memery
-
+			class RenderVariables < ProjectGenerator::Command::ProcessFiles::RenderVariables
 				using GorillaPatch::Blank
-				using GorillaPatch::Inflections
 
-				attr_reader :name, :indentation, :summary
+				attr_reader :summary
 
 				def initialize(name, namespace_option, indentation, summary)
-					@name = name
+					super name, indentation
+
 					@namespace_option = namespace_option
-					@indentation = indentation
 					@summary = summary
 
 					## Call to be sure that this is checked before author fields
 					github_namespace
 				end
-
-				## `public :binding` and `send :binding` return caller binding
-				## This is from ERB documentation: https://ruby-doc.org/core-2.7.2/Binding.html
-				# rubocop:disable Naming/AccessorMethodName
-				def get_binding
-					binding
-				end
-				# rubocop:enable Naming/AccessorMethodName
 
 				memoize def summary_string
 					quote = summary.include?("'") ? '"' : "'"
@@ -44,22 +30,6 @@ module GemGenerator
 
 				memoize def description
 					summary.match?(/[.?!]$/) ? summary : "#{summary}."
-				end
-
-				memoize def path
-					name.tr('-', '/')
-				end
-
-				memoize def title
-					name.split(/[-_]/).map(&:camelize).join(' ')
-				end
-
-				memoize def module_name
-					path.camelize
-				end
-
-				memoize def modules
-					module_name.split('::')
 				end
 
 				memoize def version_constant
@@ -142,8 +112,6 @@ module GemGenerator
 					config_file
 				end
 			end
-
-			private_constant :RenderVariables
 		end
 	end
 end
