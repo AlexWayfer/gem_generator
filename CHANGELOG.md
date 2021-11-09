@@ -2,9 +2,14 @@
 
 ## Unreleased
 
+## 0.3.2 (2021-11-10)
+
+*   Update `project_generator`.
+    Add custom parameters.
+
 ## 0.3.1 (2021-11-07)
 
-*   Require runtime depepndencies.
+*   Require runtime dependencies.
 
 ## 0.3.0 (2021-11-01)
 
