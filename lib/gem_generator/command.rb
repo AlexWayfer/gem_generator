@@ -13,6 +13,9 @@ module GemGenerator
 	class Command < ProjectGenerator::Command
 		include ProcessFiles
 
+		parameter 'NAME', 'name of a new gem'
+		parameter 'TEMPLATE', 'template path of a new gem'
+
 		option ['-n', '--namespace'], 'NAME', 'use NAME as repository namespace'
 
 		def execute
