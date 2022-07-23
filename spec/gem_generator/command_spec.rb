@@ -107,10 +107,7 @@ describe GemGenerator::Command do
 				end
 
 				after do
-					## https://github.com/rubocop/rubocop/issues/10813
-					# rubocop:disable Lint/NonAtomicFileOperation
 					FileUtils.rm_r gem_name if Dir.exist? gem_name
-					# rubocop:enable Lint/NonAtomicFileOperation
 				end
 
 				shared_examples 'correct behavior with template' do
