@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 0.4.0 (2022-10-21)
+
+*   Drop Ruby 2.6 and 2.7 support.
+*   Add Ruby 3.1 for CI.
+*   Update dependencies.
+*   Change RSpec output format to `doc`.
+
 ## 0.3.2 (2021-11-10)
 
 *   Update `project_generator`.
