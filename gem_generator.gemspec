@@ -39,7 +39,7 @@ Gem::Specification.new do |spec|
 	]
 	spec.files = Dir.glob "{#{files.join(',')}}", File::FNM_DOTMATCH
 	spec.bindir = 'exe'
-	spec.executables.concat %w[gem_generator]
+	spec.executables.concat.push 'gem_generator'
 
 	spec.add_runtime_dependency 'bundler', '~> 2.0'
 	spec.add_runtime_dependency 'gorilla_patch', '~> 5.0'
