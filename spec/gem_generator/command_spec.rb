@@ -365,15 +365,19 @@ describe GemGenerator::Command do
 								OUTPUT
 							end
 
+							let(:expected_error_text) do
+								<<~TEXT
+									You have to specify project's author name.
+									You can use `git config user.name "My Name"`, or create a configuration file.
+									Check the README.
+								TEXT
+							end
+
 							specify do
 								expect { run }.to raise_error(SystemExit).and output(
 									a_string_starting_with(expected_output_start)
 										.and(not_ending_with(non_expected_output_end))
-								).to_stdout.and output(<<~OUTPUT).to_stderr
-									You have to specify project's author name.
-									You can use `git config user.name "My Name"`, or create a configuration file.
-									Check the README.
-								OUTPUT
+								).to_stdout.and output(expected_error_text).to_stderr
 							end
 						end
 
@@ -412,15 +416,19 @@ describe GemGenerator::Command do
 									OUTPUT
 								end
 
+								let(:expected_error_text) do
+									<<~TEXT
+										You have to specify project's author email.
+										You can use `git config user.email "my.email@example.com"`, or create a configuration file.
+										Check the README.
+									TEXT
+								end
+
 								specify do
 									expect { run }.to raise_error(SystemExit).and output(
 										a_string_starting_with(expected_output_start)
 											.and(not_ending_with(non_expected_output_end))
-									).to_stdout.and output(<<~OUTPUT).to_stderr
-										You have to specify project's author email.
-										You can use `git config user.email "my.email@example.com"`, or create a configuration file.
-										Check the README.
-									OUTPUT
+									).to_stdout.and output(expected_error_text).to_stderr
 								end
 							end
 
@@ -451,15 +459,19 @@ describe GemGenerator::Command do
 								OUTPUT
 							end
 
+							let(:expected_error_text) do
+								<<~TEXT
+									You have to specify project's namespace on GitHub.
+									You can use `--namespace` option, or create a configuration file.
+									Check the README.
+								TEXT
+							end
+
 							specify do
 								expect { run }.to raise_error(SystemExit).and output(
 									a_string_starting_with(expected_output_start)
 										.and(not_ending_with(non_expected_output_end))
-								).to_stdout.and output(<<~OUTPUT).to_stderr
-									You have to specify project's namespace on GitHub.
-									You can use `--namespace` option, or create a configuration file.
-									Check the README.
-								OUTPUT
+								).to_stdout.and output(expected_error_text).to_stderr
 							end
 						end
 
