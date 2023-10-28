@@ -3,7 +3,6 @@
 [![Cirrus CI - Base Branch Build Status](https://img.shields.io/cirrus/github/AlexWayfer/gem_generator?style=flat-square)](https://cirrus-ci.com/github/AlexWayfer/gem_generator)
 [![Codecov branch](https://img.shields.io/codecov/c/github/AlexWayfer/gem_generator/main.svg?style=flat-square)](https://codecov.io/gh/AlexWayfer/gem_generator)
 [![Code Climate](https://img.shields.io/codeclimate/maintainability/AlexWayfer/gem_generator.svg?style=flat-square)](https://codeclimate.com/github/AlexWayfer/gem_generator)
-[![Depfu](https://img.shields.io/depfu/AlexWayfer/gem_generator?style=flat-square)](https://depfu.com/repos/github/AlexWayfer/gem_generator)
 [![license](https://img.shields.io/github/license/AlexWayfer/gem_generator.svg?style=flat-square)](LICENSE.txt)
 [![Gem](https://img.shields.io/gem/v/gem_generator.svg?style=flat-square)](https://rubygems.org/gems/gem_generator)
 
