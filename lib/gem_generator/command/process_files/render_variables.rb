@@ -14,7 +14,7 @@ module GemGenerator
 				attr_reader :summary
 
 				def initialize(name, namespace_option, indentation, summary)
-					super name, indentation
+					super(name, indentation)
 
 					@namespace_option = namespace_option
 					@summary = summary
