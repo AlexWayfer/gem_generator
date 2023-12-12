@@ -29,7 +29,7 @@ gem_generator --namespace=your_github_nickname name_of_a_new_gem path/to/templat
 ### With GitHub template
 
 ```sh
-gem_generator --namespace=your_github_nickname name_of_a_new_gem template_github_org/template_github_repo
+gem_generator --namespace=your_github_nickname name_of_a_new_gem template_github_org/template_github_repo --git
 ```
 
 Be aware: `gem_generator` uses `template/` directory from the GitHub repo, not the root one.
@@ -93,7 +93,7 @@ So, this option only for tabs-indented templates.
 ### Git templates
 
 You can create public git-templates and then guide users to call
-`gem_generator gem_game your_org/your_repo --git`, but be aware that `gem_generator` will look
+`gem_generator gem_name your_org/your_repo --git`, but be aware that `gem_generator` will look
 for template inside `template/` directory to allow you having out-of-template README,
 specs (for the template itself), anything else.
 
