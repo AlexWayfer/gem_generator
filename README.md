@@ -101,7 +101,7 @@ specs (for the template itself), anything else.
 
 After checking out the repo, run `bundle install` to install dependencies.
 
-Then, run `toys rspec` to run the tests.
+Then, run `bundle exec rspec` to run the tests.
 
 To install this gem onto your local machine, run `toys gem install`.
 
