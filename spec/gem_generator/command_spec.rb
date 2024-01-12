@@ -113,7 +113,7 @@ describe GemGenerator::Command do
 				shared_examples 'correct behavior with template' do
 					shared_context 'with changing git user config' do |git_property|
 						before do
-							value = send("temp_git_#{git_property}")
+							value = send :"temp_git_#{git_property}"
 							system "git config user.#{git_property} \"#{value}\""
 						end
 
