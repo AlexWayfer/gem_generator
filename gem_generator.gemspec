@@ -43,5 +43,5 @@ Gem::Specification.new do |spec|
 
 	spec.add_runtime_dependency 'bundler', '~> 2.0'
 	spec.add_runtime_dependency 'gorilla_patch', '~> 5.0'
-	spec.add_runtime_dependency 'project_generator', '~> 0.3.0'
+	spec.add_runtime_dependency 'project_generator', '~> 0.4.0'
 end

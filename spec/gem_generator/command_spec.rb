@@ -241,6 +241,15 @@ describe GemGenerator::Command do
 								it { is_expected.to match(/^\tspec.license = 'MIT'$/) }
 								it { is_expected.not_to match(/^  /) }
 							end
+
+							describe '`Gemfile` indentation' do
+								subject(:file_content) do
+									File.read(File.join(Dir.pwd, gem_name, 'Gemfile'))
+								end
+
+								it { is_expected.to match(/^\tgem 'rspec', '~> (?:\d+\.)+\d+'$/) }
+								it { is_expected.not_to match(/^  /) }
+							end
 						end
 
 						context 'with spaces indentation' do
@@ -248,7 +257,7 @@ describe GemGenerator::Command do
 								[*super(), '--indentation=spaces']
 							end
 
-							describe '.editorconfig' do
+							describe '`.editorconfig`' do
 								subject(:ini_file) do
 									IniFile.load(File.join(Dir.pwd, gem_name, '.editorconfig')).to_h
 								end
@@ -275,12 +284,21 @@ describe GemGenerator::Command do
 								end
 							end
 
-							describe '.gemspec indentation' do
+							describe '`.gemspec` indentation' do
 								subject(:file_content) do
 									File.read(File.join(Dir.pwd, gem_name, "#{gem_name}.gemspec"))
 								end
 
 								it { is_expected.to match(/^  spec.license = 'MIT'$/) }
+								it { is_expected.not_to match(/^\t/) }
+							end
+
+							describe '`Gemfile` indentation' do
+								subject(:file_content) do
+									File.read(File.join(Dir.pwd, gem_name, 'Gemfile'))
+								end
+
+								it { is_expected.to match(/^  gem 'rspec', '~> (?:\d+\.)+\d+'$/) }
 								it { is_expected.not_to match(/^\t/) }
 							end
 						end
