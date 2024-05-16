@@ -13,6 +13,13 @@ end
 
 SimpleCov.start
 
+RSpec.configure do |config|
+	## Allows RSpec to persist some state between runs in order to support
+	## the `--only-failures` and `--next-failure` CLI options. We recommend
+	## you configure your source control system to ignore this file.
+	config.example_status_persistence_file_path = "#{__dir__}/examples.txt"
+end
+
 RSpec::Matchers.define :include_lines do |expected_lines|
 	match do |actual_text|
 		expected_lines.all? do |expected_line|
