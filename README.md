@@ -34,6 +34,11 @@ gem_generator --namespace=your_github_nickname name_of_a_new_gem template_github
 
 Be aware: `gem_generator` uses `template/` directory from the GitHub repo, not the root one.
 
+### Other options
+
+`gem_generator` inherits [`project_generator`](https://github.com/AlexWayfer/project_generator),
+so please check it's general options, like `--indentation`, or you can use `--help` at any moment.
+
 ### Config file
 
 You can create a config file, `.gem_generator.yaml` (or `.yml`) like this:
