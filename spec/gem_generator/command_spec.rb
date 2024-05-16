@@ -133,13 +133,13 @@ describe GemGenerator::Command do
 					end
 
 					shared_examples 'common correct files with all data' do
+						before do
+							run ## parent subject with generation
+						end
+
 						describe 'gem_name.gemspec.erb' do
 							subject(:file_content) do
 								File.read(File.join(Dir.pwd, gem_name, "#{gem_name}.gemspec"))
-							end
-
-							before do
-								run ## parent subject with generation
 							end
 
 							let(:expected_lines) do
@@ -192,10 +192,6 @@ describe GemGenerator::Command do
 								File.read(File.join(Dir.pwd, gem_name, 'CHANGELOG.md'))
 							end
 
-							before do
-								run ## parent subject with generation
-							end
-
 							let(:expected_lines) do
 								[
 									'# Changelog',
@@ -209,16 +205,12 @@ describe GemGenerator::Command do
 							end
 						end
 
-						describe '.editorconfig' do
-							subject(:ini_file) do
-								IniFile.load(File.join(Dir.pwd, gem_name, '.editorconfig')).to_h
-							end
+						context 'with default indentation (tabs)' do
+							describe '.editorconfig' do
+								subject(:ini_file) do
+									IniFile.load(File.join(Dir.pwd, gem_name, '.editorconfig')).to_h
+								end
 
-							before do
-								run ## parent subject with generation
-							end
-
-							context 'with default indentation (tabs)' do
 								let(:expected_values) do
 									a_hash_including(
 										'*' => a_hash_including(
@@ -239,20 +231,26 @@ describe GemGenerator::Command do
 								it do
 									expect(ini_file).to match(expected_values).and not_match(not_expected_values)
 								end
-
-								describe '.gemspec indentation' do
-									subject(:file_content) do
-										File.read(File.join(Dir.pwd, gem_name, "#{gem_name}.gemspec"))
-									end
-
-									it { is_expected.to match(/^\tspec.license = 'MIT'$/) }
-									it { is_expected.not_to match(/^  /) }
-								end
 							end
 
-							context 'with spaces indentation' do
-								let(:args) do
-									[*super(), '--indentation=spaces']
+							describe '.gemspec indentation' do
+								subject(:file_content) do
+									File.read(File.join(Dir.pwd, gem_name, "#{gem_name}.gemspec"))
+								end
+
+								it { is_expected.to match(/^\tspec.license = 'MIT'$/) }
+								it { is_expected.not_to match(/^  /) }
+							end
+						end
+
+						context 'with spaces indentation' do
+							let(:args) do
+								[*super(), '--indentation=spaces']
+							end
+
+							describe '.editorconfig' do
+								subject(:ini_file) do
+									IniFile.load(File.join(Dir.pwd, gem_name, '.editorconfig')).to_h
 								end
 
 								let(:expected_values) do
@@ -275,15 +273,15 @@ describe GemGenerator::Command do
 								it do
 									expect(ini_file).to match(expected_values).and not_match(not_expected_values)
 								end
+							end
 
-								describe '.gemspec indentation' do
-									subject(:file_content) do
-										File.read(File.join(Dir.pwd, gem_name, "#{gem_name}.gemspec"))
-									end
-
-									it { is_expected.to match(/^  spec.license = 'MIT'$/) }
-									it { is_expected.not_to match(/^\t/) }
+							describe '.gemspec indentation' do
+								subject(:file_content) do
+									File.read(File.join(Dir.pwd, gem_name, "#{gem_name}.gemspec"))
 								end
+
+								it { is_expected.to match(/^  spec.license = 'MIT'$/) }
+								it { is_expected.not_to match(/^\t/) }
 							end
 						end
 					end
