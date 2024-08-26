@@ -2,6 +2,26 @@
 
 ## Unreleased
 
+## 0.5.0 (2024-08-27)
+
+*   Update `project_generator` dependency.
+
+*   Improve specs for different indentation.
+
+*   Add Ruby 3.2 and 3.3 to CI.
+
+*   Improve documentation.
+
+*   Improve Cirrus CI configuration.
+
+*   Lock development dependencies versions more strict.
+
+*   Update development dependencies.
+
+*   Resolve new RuboCop offenses.
+
+*   Switch from Depfu to Renovate.
+
 ## 0.4.0 (2022-10-21)
 
 *   Drop Ruby 2.6 and 2.7 support.
