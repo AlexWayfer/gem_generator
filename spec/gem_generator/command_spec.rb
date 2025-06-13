@@ -344,13 +344,13 @@ describe GemGenerator::Command do
 								run
 							end
 
-							include_examples 'correct system calls with all data'
+							it_behaves_like 'correct system calls with all data'
 						end
 
 						describe 'files' do
 							include_context 'with supressing regular output'
 
-							include_examples 'correct files with all data'
+							it_behaves_like 'correct files with all data'
 						end
 					end
 
@@ -397,7 +397,7 @@ describe GemGenerator::Command do
 							end
 						end
 
-						include_examples 'target directory does not exist'
+						it_behaves_like 'target directory does not exist'
 					end
 
 					shared_examples 'correct behavior without author email' do
@@ -448,7 +448,7 @@ describe GemGenerator::Command do
 								end
 							end
 
-							include_examples 'target directory does not exist'
+							it_behaves_like 'target directory does not exist'
 						end
 					end
 
@@ -491,20 +491,20 @@ describe GemGenerator::Command do
 							end
 						end
 
-						include_examples 'target directory does not exist'
+						it_behaves_like 'target directory does not exist'
 					end
 
 					shared_examples 'when author names with apostrophe and without' do
 						context 'when author name does not include apostrophe' do
 							let(:author_name) { 'Erica Johns' }
 
-							include_examples 'correct behavior with all data'
+							it_behaves_like 'correct behavior with all data'
 						end
 
 						context 'when author name includes apostrophe' do
 							let(:author_name) { "Lynda O'Kon" }
 
-							include_examples 'correct behavior with all data'
+							it_behaves_like 'correct behavior with all data'
 						end
 					end
 
@@ -526,7 +526,7 @@ describe GemGenerator::Command do
 						end
 
 						context 'without namespace option' do
-							include_examples 'correct behavior without namespace'
+							it_behaves_like 'correct behavior without namespace'
 						end
 
 						context 'with namespace option' do
@@ -549,7 +549,7 @@ describe GemGenerator::Command do
 										let(:temp_git_name) { author_name }
 									end
 
-									include_examples 'when author names with apostrophe and without'
+									it_behaves_like 'when author names with apostrophe and without'
 
 									context 'with incorrect indentation option' do
 										let(:args) do
@@ -577,12 +577,12 @@ describe GemGenerator::Command do
 								end
 
 								context 'without author name from git' do
-									include_examples 'correct behavior without author name'
+									it_behaves_like 'correct behavior without author name'
 								end
 							end
 
 							context 'without author email from git' do
-								include_examples 'correct behavior without author email'
+								it_behaves_like 'correct behavior without author email'
 							end
 						end
 					end
@@ -612,7 +612,7 @@ describe GemGenerator::Command do
 											let(:temp_git_name) { FFaker::Name.name }
 										end
 
-										include_examples 'when author names with apostrophe and without'
+										it_behaves_like 'when author names with apostrophe and without'
 									end
 
 									context 'without author name in config file' do
@@ -621,11 +621,11 @@ describe GemGenerator::Command do
 												let(:temp_git_name) { author_name }
 											end
 
-											include_examples 'when author names with apostrophe and without'
+											it_behaves_like 'when author names with apostrophe and without'
 										end
 
 										context 'without author name from git' do
-											include_examples 'correct behavior without author name'
+											it_behaves_like 'correct behavior without author name'
 										end
 									end
 								end
@@ -644,7 +644,7 @@ describe GemGenerator::Command do
 										let(:temp_git_email) { FFaker::Internet.email }
 									end
 
-									include_examples 'correct behavior with author email'
+									it_behaves_like 'correct behavior with author email'
 								end
 
 								context 'without author email in config file' do
@@ -655,18 +655,18 @@ describe GemGenerator::Command do
 											let(:temp_git_email) { author_email }
 										end
 
-										include_examples 'correct behavior with author email'
+										it_behaves_like 'correct behavior with author email'
 									end
 
 									context 'without author email from git' do
-										include_examples 'correct behavior without author email'
+										it_behaves_like 'correct behavior without author email'
 									end
 								end
 							end
 
 							context 'without namespace inside' do
 								context 'without namespace option' do
-									include_examples 'correct behavior without namespace'
+									it_behaves_like 'correct behavior without namespace'
 								end
 
 								context 'with namespace option' do
@@ -674,7 +674,7 @@ describe GemGenerator::Command do
 										[*super(), "--namespace=#{namespace}"]
 									end
 
-									include_examples 'correct behavior with namespace'
+									it_behaves_like 'correct behavior with namespace'
 								end
 							end
 
@@ -687,7 +687,7 @@ describe GemGenerator::Command do
 								let(:namespace) { FFaker::Internet.user_name }
 
 								context 'without namespace option' do
-									include_examples 'correct behavior with namespace'
+									it_behaves_like 'correct behavior with namespace'
 								end
 
 								context 'with namespace option' do
@@ -697,7 +697,7 @@ describe GemGenerator::Command do
 										[*super(), "--namespace=#{namespace}"]
 									end
 
-									include_examples 'correct behavior with namespace'
+									it_behaves_like 'correct behavior with namespace'
 								end
 							end
 						end
@@ -705,13 +705,13 @@ describe GemGenerator::Command do
 						context 'when file extension is `.yaml`' do
 							let(:config_file_name) { '.gem_generator.yaml' }
 
-							include_examples 'correct behavior'
+							it_behaves_like 'correct behavior'
 						end
 
 						context 'when file extension is `.yml`' do
 							let(:config_file_name) { '.gem_generator.yml' }
 
-							include_examples 'correct behavior'
+							it_behaves_like 'correct behavior'
 						end
 					end
 				end
@@ -720,7 +720,7 @@ describe GemGenerator::Command do
 					let(:template) { "#{__dir__}/../support/example_template" }
 
 					shared_examples 'correct system calls with all data' do
-						include_examples 'common correct system calls with all data'
+						it_behaves_like 'common correct system calls with all data'
 
 						context 'without `package.json` file' do
 							specify do
@@ -746,7 +746,7 @@ describe GemGenerator::Command do
 					end
 
 					shared_examples 'correct files with all data' do
-						include_examples 'common correct files with all data'
+						it_behaves_like 'common correct files with all data'
 
 						describe 'bin/console.erb' do
 							describe 'permissions' do
@@ -768,10 +768,10 @@ describe GemGenerator::Command do
 					end
 
 					shared_examples 'correct behavior with all data' do
-						include_examples 'common correct behavior with all data'
+						it_behaves_like 'common correct behavior with all data'
 					end
 
-					include_examples 'correct behavior with template'
+					it_behaves_like 'correct behavior with template'
 				end
 
 				context 'with `--git` option (for template)' do
@@ -796,18 +796,18 @@ describe GemGenerator::Command do
 					end
 
 					shared_examples 'correct system calls with all data' do
-						include_examples 'common correct system calls with all data'
+						it_behaves_like 'common correct system calls with all data'
 					end
 
 					shared_examples 'correct files with all data' do
-						include_examples 'common correct files with all data'
+						it_behaves_like 'common correct files with all data'
 					end
 
 					shared_examples 'correct behavior with all data' do
-						include_examples 'common correct behavior with all data'
+						it_behaves_like 'common correct behavior with all data'
 					end
 
-					include_examples 'correct behavior with template'
+					it_behaves_like 'correct behavior with template'
 				end
 			end
 		end
