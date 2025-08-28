@@ -21,7 +21,7 @@ group :test do
 	gem 'ffaker', '~> 2.19'
 	gem 'rspec', '~> 3.9'
 	gem 'simplecov', '~> 0.22.0'
-	gem 'simplecov-cobertura', '~> 2.1'
+	gem 'simplecov-cobertura', '~> 3.1'
 end
 
 group :lint do
