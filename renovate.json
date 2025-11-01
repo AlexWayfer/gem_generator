@@ -1,36 +1,36 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
 	"extends": [
-		"config:base",
+		"config:recommended",
 		":disableDependencyDashboard"
 	],
 	"packageRules": [
 		{
-			"matchPackagePatterns": ["^remark"],
-			"matchCategories": ["node"],
+			"matchPackageNames": ["remark*"],
+			"matchDatasources": ["npm"],
 			"groupName": "remark packages"
 		},
 		{
-			"matchPackagePatterns": ["^bundler"],
-			"matchCategories": ["ruby"],
+			"matchPackageNames": ["bundler*"],
+			"matchDatasources": ["rubygems"],
 			"groupName": "Bundler packages"
 		},
 		{
-			"matchPackagePatterns": ["^rubocop"],
-			"matchCategories": ["ruby"],
+			"matchPackageNames": ["rubocop*"],
+			"matchDatasources": ["rubygems"],
 			"groupName": "RuboCop packages"
 		},
 		{
-			"matchPackagePatterns": ["^simplecov"],
-			"matchCategories": ["ruby"],
+			"matchPackageNames": ["simplecov*"],
+			"matchDatasources": ["rubygems"],
 			"groupName": "SimpleCov packages"
 		},
 		{
-			"matchPackagePatterns": [
-				"^toys",
-				"_toys$"
+			"matchPackageNames": [
+				"toys*",
+				"*_toys"
 			],
-			"matchCategories": ["ruby"],
+			"matchDatasources": ["rubygems"],
 			"groupName": "Toys packages"
 		}
 	]
