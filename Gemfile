@@ -10,7 +10,7 @@ group :development do
 	gem 'inifile', '~> 3.0'
 
 	gem 'gem_toys', '~> 0.15.0'
-	gem 'toys', '~> 0.16.0'
+	gem 'toys', '~> 0.17.1'
 end
 
 group :audit do
