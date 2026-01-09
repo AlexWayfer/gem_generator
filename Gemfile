@@ -9,7 +9,7 @@ group :development do
 
 	gem 'inifile', '~> 3.0'
 
-	gem 'gem_toys', '~> 0.16.0'
+	gem 'gem_toys', '~> 1.0.1'
 	gem 'toys', '~> 0.17.0'
 end
 
