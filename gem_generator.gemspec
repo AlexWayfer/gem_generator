@@ -42,6 +42,6 @@ Gem::Specification.new do |spec|
 	spec.executables.concat.push 'gem_generator'
 
 	spec.add_dependency 'bundler', '~> 2.0'
-	spec.add_dependency 'gorilla_patch', '~> 5.0'
+	spec.add_dependency 'gorilla_patch', '~> 6.0'
 	spec.add_dependency 'project_generator', '~> 0.4.0'
 end
