@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+## 1.0.0 (2026-02-09)
+
+*   Drop Ruby 3.0 and 3.1 support.
+*   Add Ruby 3.4 and 4.0 support.
+*   Replace `readline` with `reline` dependency.
+*   Update development dependencies.
+*   Resolve new RuboCop offenses.
+*   Improve CI config.
+
 ## 0.5.0 (2024-08-27)
 
 *   Update `project_generator` dependency.
