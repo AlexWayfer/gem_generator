@@ -40,11 +40,11 @@ module GemGenerator
 		private
 
 		def ask_for_summary
-			require 'readline'
+			require 'reline'
 
 			puts 'Please, write a summary for the gem:'
 
-			result = Readline.readline('> ', true)
+			result = Reline.readline('> ', true)
 
 			puts <<~TEXT
 

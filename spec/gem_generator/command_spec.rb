@@ -94,8 +94,8 @@ describe GemGenerator::Command do
 					allow($stdout).to receive(:puts).and_call_original
 
 					allow($stdout).to receive(:puts).with('Please, write a summary for the gem:')
-					allow(Readline).to receive(:readline).and_call_original
-					allow(Readline).to receive(:readline).with('> ', true).and_return gem_summary
+					allow(Reline).to receive(:readline).and_call_original
+					allow(Reline).to receive(:readline).with('> ', true).and_return gem_summary
 					allow($stdout).to receive(:puts).with(
 						/Thank you! You can write more detailed description later/
 					)
