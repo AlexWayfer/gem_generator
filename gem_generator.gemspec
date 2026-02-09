@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
 	DESC
 	spec.license = 'MIT'
 
-	spec.required_ruby_version = '>= 3.0', '< 4'
+	spec.required_ruby_version = '>= 3.2', '< 4'
 
 	github_uri = "https://github.com/AlexWayfer/#{spec.name}"
 
