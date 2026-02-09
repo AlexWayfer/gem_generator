@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
 	DESC
 	spec.license = 'MIT'
 
-	spec.required_ruby_version = '>= 3.2', '< 4'
+	spec.required_ruby_version = '>= 3.2', '< 5'
 
 	github_uri = "https://github.com/AlexWayfer/#{spec.name}"
 
@@ -42,6 +42,6 @@ Gem::Specification.new do |spec|
 	spec.executables.concat.push 'gem_generator'
 
 	spec.add_dependency 'bundler', '>= 2.0', '< 5'
-	spec.add_dependency 'gorilla_patch', '~> 5.0'
-	spec.add_dependency 'project_generator', '~> 0.4.0'
+	spec.add_dependency 'gorilla_patch', '~> 6.0'
+	spec.add_dependency 'project_generator', '~> 1.0'
 end
